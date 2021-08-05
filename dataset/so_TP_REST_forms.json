@@ -1,0 +1,28 @@
+{
+	"name": "so_TP_REST_forms",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TypeFormLasRozas",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"workspace_id": {
+				"type": "string",
+				"defaultValue": "workspace_id"
+			}
+		},
+		"folder": {
+			"name": "AytoLasRozas/TypeForm"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "/forms?page_size=200&workspace_id=@{dataset().workspace_id}",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,108 @@
+{
+	"name": "dbo_EBevents_tmp2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/EventBrite"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "c_event_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "d_event",
+				"type": "nvarchar"
+			},
+			{
+				"name": "d_description",
+				"type": "text"
+			},
+			{
+				"name": "d_summary",
+				"type": "text"
+			},
+			{
+				"name": "a_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "f_start",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "f_end",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "f_created",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "f_changed",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "f_published",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "d_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "c_organization",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "c_category",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "c_subcategory",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "c_format_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "f_aud_create",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "f_aud_upload",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "E_EBevents_tmp2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

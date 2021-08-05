@@ -1,0 +1,45 @@
+{
+	"name": "merge_altertable",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "dbo_EBevents_tmp",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "dbo_EBevents_tmp2",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dbo_EBevents_tmp2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Modificarfila1"
+				},
+				{
+					"name": "Combinacion1"
+				},
+				{
+					"name": "Columnaderivada1"
+				}
+			],
+			"script": "source(output(\n\t\tc_event_id as long,\n\t\td_event as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT  [c_event_id]\\n      ,[d_event]\\n  FROM [dbo].[EBevents_tmp]',\n\tformat: 'query') ~> source2\nsource(output(\n\t\tc_event_id as long,\n\t\td_event as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT  [c_event_id]\\n      ,[d_event]\\n  FROM [dbo].[E_EBevents_tmp2]\\n',\n\tformat: 'query') ~> source3\nCombinacion1 alterRow(updateIf(equals(source2@c_event_id,source3@c_event_id)),\n\tinsertIf(!isNull(source2@c_event_id)&&isNull(source3@c_event_id)),\n\tdeleteIf(isNull(source2@c_event_id)&&!isNull(source3@c_event_id)),\n\tupsertIf(true())) ~> Modificarfila1\nsource2, source3 join(source2@c_event_id == source3@c_event_id,\n\tjoinType:'outer',\n\tbroadcast: 'auto')~> Combinacion1\nModificarfila1 derive(c_event_id = coalesce(source2@c_event_id, source3@c_event_id),\n\t\td_event = source2@d_event) ~> Columnaderivada1\nColumnaderivada1 sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tc_event_id as long,\n\t\td_event as string,\n\t\td_description as string,\n\t\td_summary as string,\n\t\ta_url as string,\n\t\tf_start as timestamp,\n\t\tf_end as timestamp,\n\t\tf_created as timestamp,\n\t\tf_changed as timestamp,\n\t\tf_published as timestamp,\n\t\td_status as string,\n\t\tc_organization as long,\n\t\tc_category as long,\n\t\tc_subcategory as integer,\n\t\tc_format_id as integer,\n\t\tf_aud_create as timestamp,\n\t\tf_aud_upload as timestamp\n\t),\n\tdeletable:true,\n\tinsertable:true,\n\tupdateable:true,\n\tupsertable:false,\n\tkeys:['c_event_id'],\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tc_event_id,\n\t\td_event\n\t)) ~> sink1"
+		}
+	}
+}

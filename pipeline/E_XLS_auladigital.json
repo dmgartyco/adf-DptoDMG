@@ -1,0 +1,178 @@
+{
+	"name": "E_XLS_auladigital",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_XLSAulaDigital",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"additionalColumns": [
+							{
+								"name": "f_aud_upload",
+								"value": {
+									"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Marca temporal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Marca temporal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nombre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apellidos",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apellidos",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Email",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Código Postal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Código Postal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Situación profesional",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Situación profesional",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Aceptación Aviso Legal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aceptación Aviso Legal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Rango de edad",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Rango de edad",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nivel máximo de estudios",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nivel máximo de estudios",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Enviada Licencia",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Enviada Licencia",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "f_aud_upload",
+									"type": "String"
+								},
+								"sink": {
+									"name": "f_aud_upload",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel_AulaDigital",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tg_XLS_SQL_aulaDigital",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/Excel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T09:25:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

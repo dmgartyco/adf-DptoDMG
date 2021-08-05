@@ -1,0 +1,188 @@
+{
+	"name": "E_XLS_empleo",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_XLSEmpleo",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"additionalColumns": [
+							{
+								"name": "f_aud_upload",
+								"value": {
+									"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Origen del dato",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Origen del dato",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre de la empresa",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nombre de la empresa",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CIF",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CIF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Municipio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Municipio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre del contacto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nombre del contacto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apellido del contacto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apellido del contacto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cargo del contacto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Cargo del contacto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Email",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Teléfono",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Teléfono",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Teléfono 2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Teléfono 2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Observaciones",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Observaciones",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "f_aud_upload",
+									"type": "String"
+								},
+								"sink": {
+									"name": "f_aud_upload",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel_Empleo",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tg_XLS_SQL_empleo",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/Excel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T09:25:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

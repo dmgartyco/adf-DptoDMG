@@ -1,0 +1,69 @@
+{
+	"name": "Excel_AulaDigital",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/Excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Respuestas de formulario 1",
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "Únete al Aula Digital Las Rozas + Coursera (respuestas).xlsx"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Origen del dato",
+				"type": "String"
+			},
+			{
+				"name": "ACTIVIDAD",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de la empresa",
+				"type": "String"
+			},
+			{
+				"name": "CIF",
+				"type": "String"
+			},
+			{
+				"name": "Municipio",
+				"type": "String"
+			},
+			{
+				"name": "Dirección",
+				"type": "String"
+			},
+			{
+				"name": "Nombre y apellidos del contacto",
+				"type": "String"
+			},
+			{
+				"name": "Cargo del contacto",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			},
+			{
+				"name": "Teléfono",
+				"type": "String"
+			},
+			{
+				"name": "Teléfono 2",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

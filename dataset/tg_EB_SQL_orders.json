@@ -1,0 +1,20 @@
+{
+	"name": "tg_EB_SQL_orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/EventBrite"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "sa",
+			"table": "E_EBorders"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

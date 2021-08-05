@@ -1,0 +1,25 @@
+{
+	"name": "AytoLasRozas_EB_Incremental_Diaria",
+	"properties": {
+		"description": "Carga incremental diaria de orders de EventBrite del Ayto Las Rozas",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "E_EB_global_inc",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2021-05-12T02:02:00",
+				"timeZone": "Romance Standard Time"
+			}
+		}
+	}
+}

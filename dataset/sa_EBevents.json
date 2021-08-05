@@ -1,0 +1,104 @@
+{
+	"name": "sa_EBevents",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/EventBrite"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "nombre_evento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "desc_evento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "local_start",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "local_end",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "organization_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "created",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "changed",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "published",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "summary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "organizer_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "subcategory_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "format_id",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "resource_uri",
+				"type": "nvarchar"
+			},
+			{
+				"name": "f_uploaded",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "sa",
+			"table": "E_EBevents"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

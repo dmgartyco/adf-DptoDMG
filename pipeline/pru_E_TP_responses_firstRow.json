@@ -1,0 +1,181 @@
+{
+	"name": "pru_E_TP_responses_firstRow",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupForms",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT [id] FROM dbo.TPForms;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "dbo_TPForms",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
+			},
+			{
+				"name": "ForEachForms",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupForms",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@array(activity('LookupForms').output)\n\n",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "E_TPResponses_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "/forms/@item().firstRow.id/responses"
+								},
+								{
+									"name": "Destination",
+									"value": "dbo.E_TPResponses_global"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['landing_id']"
+											},
+											"sink": {
+												"name": "landing_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['token']"
+											},
+											"sink": {
+												"name": "token",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['response_id']"
+											},
+											"sink": {
+												"name": "response_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['landed_at']"
+											},
+											"sink": {
+												"name": "landed_at",
+												"type": "DateTime"
+											}
+										},
+										{
+											"source": {
+												"path": "['submitted_at']"
+											},
+											"sink": {
+												"name": "submitted_at",
+												"type": "DateTime"
+											}
+										},
+										{
+											"source": {
+												"path": "['metadata']['referer']"
+											},
+											"sink": {
+												"name": "meta_referer",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['@item().firstRow.id']"
+											},
+											"sink": {
+												"name": "id_form",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "$['items']",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "so_TP_REST_responses_global",
+									"type": "DatasetReference",
+									"parameters": {
+										"form_id": "id_form"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "tg_TP_SQL_responses_global",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/TypeForm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T08:32:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "Excel_ConectaAlimentacion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/Excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Alimentación y hostelería",
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "LasRozasConecta_min.xlsx"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

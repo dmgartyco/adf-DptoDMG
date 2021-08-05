@@ -1,0 +1,9 @@
+{
+	"name": "DMG-DF",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6608581f-a4d9-4ff7-9daf-5b1ea52b04c7",
+		"tenantId": "b56240ff-98d1-4d13-8e7e-92dcc57a13cc"
+	}
+}

@@ -1,0 +1,113 @@
+{
+	"name": "E_TP_workspaces",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_TPWorkspaces",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"additionalColumns": [
+							{
+								"name": "f_aud_upload",
+								"value": {
+									"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+									"type": "Expression"
+								}
+							}
+						],
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "DELETE FROM dbo.E_TPWorkspaces",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "workspace_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['account_id']"
+								},
+								"sink": {
+									"name": "account_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['self']['href']"
+								},
+								"sink": {
+									"name": "href",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['f_aud_upload']"
+								},
+								"sink": {
+									"name": "f_aud_upload",
+									"type": "DateTime"
+								}
+							}
+						],
+						"collectionReference": "$['items']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "so_TP_REST_workspace",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tg_TP_SQL_workspace",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/TypeForm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-26T15:27:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

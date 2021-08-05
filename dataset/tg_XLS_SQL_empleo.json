@@ -1,0 +1,69 @@
+{
+	"name": "tg_XLS_SQL_empleo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/Excel"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Origen del dato",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nombre de la empresa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CIF",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Municipio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nombre del contacto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Apellido del contacto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cargo del contacto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Teléfono",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Teléfono 2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Observaciones",
+				"type": "nvarchar"
+			},
+			{
+				"name": "f_aud_upload",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "sa",
+			"table": "E_XLSempleos"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

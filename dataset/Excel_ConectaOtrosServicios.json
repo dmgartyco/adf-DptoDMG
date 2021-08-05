@@ -1,0 +1,24 @@
+{
+	"name": "Excel_ConectaOtrosServicios",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/Excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "LasRozasConecta_min.xlsx"
+			},
+			"sheetIndex": 1,
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

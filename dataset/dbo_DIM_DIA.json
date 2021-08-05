@@ -1,0 +1,68 @@
+{
+	"name": "dbo_DIM_DIA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/DIM_DIA"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "C_TIEMPO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "F_FECHA",
+				"type": "date"
+			},
+			{
+				"name": "I_ANNO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "I_MES",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "D_MES",
+				"type": "varchar"
+			},
+			{
+				"name": "I_DIA_MES",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "I_DIA_ANNO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "I_SEMANA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "I_DIA_SEMANA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "D_DIA_SEMANA",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_DIM_DIA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

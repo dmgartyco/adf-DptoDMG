@@ -1,0 +1,46 @@
+{
+	"name": "E_EB_global_inicial",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecuteEvents",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "E_EB_events",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": false
+				}
+			},
+			{
+				"name": "ExecuteOrders",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ExecuteEvents",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "E_EB_orders",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": false
+				}
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/EventBrite"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-19T07:33:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

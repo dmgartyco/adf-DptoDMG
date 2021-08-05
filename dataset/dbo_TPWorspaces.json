@@ -1,0 +1,54 @@
+{
+	"name": "dbo_TPWorspaces",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/TypeForm"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "last_updated_at",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "is_public",
+				"type": "bit"
+			},
+			{
+				"name": "is_trial",
+				"type": "bit"
+			},
+			{
+				"name": "href",
+				"type": "nvarchar"
+			},
+			{
+				"name": "display",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TPWorkspaces"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

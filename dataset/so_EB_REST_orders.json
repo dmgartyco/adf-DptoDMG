@@ -1,0 +1,19 @@
+{
+	"name": "so_EB_REST_orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EVENTBRITE_LasRozas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/EventBrite"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/v3/organizations/333506760087/orders/"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

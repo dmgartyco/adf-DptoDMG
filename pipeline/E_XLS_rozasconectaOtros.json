@@ -1,0 +1,228 @@
+{
+	"name": "E_XLS_rozasconectaOtros",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_XLSRozasConectaOtros",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"additionalColumns": [
+							{
+								"name": "f_aud_upload",
+								"value": {
+									"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Marca temporal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Marca temporal",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre del negocio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nombre del negocio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo de actividad",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tipo de actividad",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Dirección",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dirección",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Teléfono",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Teléfono",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Whatsapp",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Whatsapp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Email",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Horario de servicio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Horario de servicio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "boolean1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "boolean1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "boolean2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "boolean2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "boolean3",
+									"type": "String"
+								},
+								"sink": {
+									"name": "boolean3",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Zona de reparto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Zona de reparto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Aceptación Aviso Legal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aceptación Aviso Legal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COORDENADAS DE UBICACIÓN ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COORDENADAS DE UBICACIÓN ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "f_aud_upload",
+									"type": "String"
+								},
+								"sink": {
+									"name": "f_aud_upload",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel_ConectaOtrosServicios",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tg_XLS_SQL_rozasConecta",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/Excel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T11:12:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

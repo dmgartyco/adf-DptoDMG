@@ -1,0 +1,353 @@
+{
+	"name": "E_TP_forms_foreach",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupForms",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT [form_id] FROM dbo.E_TPForms;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "dbo_TPForms",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEachForms",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupForms",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupForms').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "E_TPResponses",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "/forms/@{item().form_id}/responses?page_size=1000\n"
+								},
+								{
+									"name": "Destination",
+									"value": "dbo.E_TPResponses_global"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"additionalColumns": [
+										{
+											"name": "form_id",
+											"value": {
+												"value": "@item().form_id",
+												"type": "Expression"
+											}
+										},
+										{
+											"name": "f_aud_upload",
+											"value": {
+												"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+												"type": "Expression"
+											}
+										}
+									],
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['landing_id']"
+											},
+											"sink": {
+												"name": "landing_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['response_id']"
+											},
+											"sink": {
+												"name": "response_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['landed_at']"
+											},
+											"sink": {
+												"name": "landed_at",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['submitted_at']"
+											},
+											"sink": {
+												"name": "submitted_at",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['metadata']['referer']"
+											},
+											"sink": {
+												"name": "meta_referer",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['form_id']"
+											},
+											"sink": {
+												"name": "form_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['f_aud_upload']"
+											},
+											"sink": {
+												"name": "f_aud_upload",
+												"type": "DateTime"
+											}
+										}
+									],
+									"collectionReference": "$['items']",
+									"mapComplexValuesToString": true
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "so_TP_REST_responses_global",
+									"type": "DatasetReference",
+									"parameters": {
+										"form_id": "@{item().form_id}"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "tg_TP_SQL_responses_global",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEachForms2",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupForms",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupForms').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "E_TPInsights",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "/forms/@{item().form_id}/responses?page_size=1000\n"
+								},
+								{
+									"name": "Destination",
+									"value": "dbo.E_TPResponses_global"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"additionalColumns": [
+										{
+											"name": "form_id",
+											"value": {
+												"value": "@item().form_id",
+												"type": "Expression"
+											}
+										},
+										{
+											"name": "f_aud_upload",
+											"value": {
+												"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+												"type": "Expression"
+											}
+										}
+									],
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['id']"
+											},
+											"sink": {
+												"name": "id"
+											}
+										},
+										{
+											"source": {
+												"path": "['title']"
+											},
+											"sink": {
+												"name": "title"
+											}
+										},
+										{
+											"source": {
+												"path": "['label']"
+											},
+											"sink": {
+												"name": "label"
+											}
+										},
+										{
+											"source": {
+												"path": "['ref']"
+											},
+											"sink": {
+												"name": "ref"
+											}
+										},
+										{
+											"source": {
+												"path": "['type']"
+											},
+											"sink": {
+												"name": "type"
+											}
+										},
+										{
+											"source": {
+												"path": "$['form_id']"
+											},
+											"sink": {
+												"name": "form_id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['f_aud_upload']"
+											},
+											"sink": {
+												"name": "f_aud_upload"
+											}
+										}
+									],
+									"collectionReference": "$['fields']",
+									"mapComplexValuesToString": true
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "so_TP_REST_forms_insights",
+									"type": "DatasetReference",
+									"parameters": {
+										"form_id": {
+											"value": "@{item().form_id}",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "tg_TP_SQL_forms_insights",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/TypeForm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T08:32:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

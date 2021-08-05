@@ -1,0 +1,46 @@
+{
+	"name": "E_XLS_rozasconecta",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecuteConectaAli",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "E_XLS_rozasconectaAli",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ExecuteConectaOtros",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ExecuteConectaAli",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "E_XLS_rozasconectaOtros",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/Excel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T11:12:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

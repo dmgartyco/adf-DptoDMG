@@ -1,0 +1,36 @@
+{
+	"name": "so_TP_REST_responses_detalle_inc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TypeFormLasRozas",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"form_id": {
+				"type": "string",
+				"defaultValue": "form_id"
+			},
+			"response_id": {
+				"type": "string",
+				"defaultValue": "response_id"
+			},
+			"f_incremental": {
+				"type": "string",
+				"defaultValue": "f_incremental"
+			}
+		},
+		"folder": {
+			"name": "AytoLasRozas/TypeForm"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "/forms/@{dataset().form_id}/responses?included_response_ids=@{dataset().response_id}&since=@{dataset().f_incremental}\n\n",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

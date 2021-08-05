@@ -1,0 +1,174 @@
+{
+	"name": "pru_E_TP_responses_parameter",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_TPResponses",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "/forms/@{pipeline().parameters.id_form}/responses"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.E_TPResponses_global"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['@{pipeline().parameters.id_form}']"
+								},
+								"sink": {
+									"name": "id_form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['landing_id']"
+								},
+								"sink": {
+									"name": "landing_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['token']"
+								},
+								"sink": {
+									"name": "token",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['response_id']"
+								},
+								"sink": {
+									"name": "response_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['landed_at']"
+								},
+								"sink": {
+									"name": "landed_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "['submitted_at']"
+								},
+								"sink": {
+									"name": "submitted_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "['metadata']['referer']"
+								},
+								"sink": {
+									"name": "meta_referer",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['items']",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "so_TP_REST_responses_global",
+						"type": "DatasetReference",
+						"parameters": {
+							"form_id": {
+								"value": "@pipeline().parameters.id_form",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tg_TP_SQL_responses_global",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT id as id_form FROM dbo.TPForms;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "dbo_TPForms",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"id_form": {
+				"type": "string",
+				"defaultValue": "id_form"
+			}
+		},
+		"folder": {
+			"name": "AytoLasRozas/Staging/TypeForm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-27T08:32:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

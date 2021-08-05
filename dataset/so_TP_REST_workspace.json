@@ -1,0 +1,19 @@
+{
+	"name": "so_TP_REST_workspace",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TypeFormLasRozas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/TypeForm"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/workspaces?page_size=200"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

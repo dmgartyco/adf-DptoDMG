@@ -1,0 +1,289 @@
+{
+	"name": "E_TP_forms",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupWorkspaces",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DeleteFormsInsights",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT [workspace_id] FROM dbo.E_TPWorkspaces;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "dbo_TPForms",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForWorkspace",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupWorkspaces",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupWorkspaces').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "E_TPForms",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "/forms?page_size=200&workspace_id=@{item().workspace_id}"
+								},
+								{
+									"name": "Destination",
+									"value": "dbo.E_TPForms"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"additionalColumns": [
+										{
+											"name": "workspace_id",
+											"value": {
+												"value": "@item().workspace_id",
+												"type": "Expression"
+											}
+										},
+										{
+											"name": "f_aud_upload",
+											"value": {
+												"value": "@convertTimeZone(utcnow(), 'UTC', 'Romance Standard Time')",
+												"type": "Expression"
+											}
+										}
+									],
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['id']"
+											},
+											"sink": {
+												"name": "form_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['type']"
+											},
+											"sink": {
+												"name": "type",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['title']"
+											},
+											"sink": {
+												"name": "title",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['last_updated_at']"
+											},
+											"sink": {
+												"name": "last_updated_at",
+												"type": "DateTime"
+											}
+										},
+										{
+											"source": {
+												"path": "['settings']['is_public']"
+											},
+											"sink": {
+												"name": "is_public",
+												"type": "Boolean"
+											}
+										},
+										{
+											"source": {
+												"path": "['settings']['is_trial']"
+											},
+											"sink": {
+												"name": "is_trial",
+												"type": "Boolean"
+											}
+										},
+										{
+											"source": {
+												"path": "['self']['href']"
+											},
+											"sink": {
+												"name": "href",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['_links']['display']"
+											},
+											"sink": {
+												"name": "display",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['workspace_id']"
+											},
+											"sink": {
+												"name": "workspace_id",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['f_aud_upload']"
+											},
+											"sink": {
+												"name": "f_aud_upload",
+												"type": "DateTime"
+											}
+										}
+									],
+									"collectionReference": "$['items']"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "so_TP_REST_forms",
+									"type": "DatasetReference",
+									"parameters": {
+										"workspace_id": {
+											"value": "@{item().workspace_id}",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "tg_TP_SQL_forms",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "DeleteForms",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "deleteForms",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DeleteFormsInsights",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "DeleteForms",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "deleteFormsInsights",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/TypeForm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-28T07:36:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

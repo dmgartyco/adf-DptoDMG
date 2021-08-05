@@ -1,0 +1,159 @@
+{
+	"name": "E_XLS_DIM_DIA",
+	"properties": {
+		"activities": [
+			{
+				"name": "E_XLSAulaDigital",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"disableMetricsCollection": false,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "c_tiempo_id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "C_TIEMPO_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "f_fecha",
+									"type": "String"
+								},
+								"sink": {
+									"name": "F_FECHA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "i_anno",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_ANNO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "i_mes",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_MES",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "d_mes",
+									"type": "String"
+								},
+								"sink": {
+									"name": "D_MES",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "i_dia_mes",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_DIA_MES",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "i_dia_anno",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_DIA_ANNO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "i_semana",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_SEMANA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "i_dia_semana",
+									"type": "String"
+								},
+								"sink": {
+									"name": "I_DIA_SEMANA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "d_dia_semana",
+									"type": "String"
+								},
+								"sink": {
+									"name": "D_DIA_SEMANA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel_DIM_DIA",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dbo_DIM_DIA",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AytoLasRozas/Staging/DIM_DIA"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-26T10:49:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

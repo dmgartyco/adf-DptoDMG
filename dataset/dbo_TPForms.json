@@ -1,0 +1,63 @@
+{
+	"name": "dbo_TPForms",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AytoLasRozas/TypeForm"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "form_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "last_updated_at",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "is_public",
+				"type": "bit"
+			},
+			{
+				"name": "is_trial",
+				"type": "bit"
+			},
+			{
+				"name": "href",
+				"type": "nvarchar"
+			},
+			{
+				"name": "display",
+				"type": "nvarchar"
+			},
+			{
+				"name": "workspace_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "f_aud_upload",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "E_TPForms"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
