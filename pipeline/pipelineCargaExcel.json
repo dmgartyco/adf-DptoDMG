@@ -112,7 +112,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Excel_CorreosMarket",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"itemName"
