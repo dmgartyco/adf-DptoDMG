@@ -35,11 +35,11 @@
 							"userProperties": [
 								{
 									"name": "Source",
-									"value": "powerbi-20210806-0055/@{item().FileName}"
+									"value": "powerbi-20210806-0055/@{item().name}"
 								},
 								{
 									"name": "Destination",
-									"value": "sa.E_XLSauladigital"
+									"value": "dbo.replace(@item().name, '.xlsx', '')"
 								}
 							],
 							"typeProperties": {
@@ -112,20 +112,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Excel_CorreosMarket",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileName": {
-								"value": "@pipeline().parameters.FileName",
-								"type": "Expression"
-							},
-							"SheetName": {
-								"value": "@pipeline().parameters.FileName",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"childItems"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "FileServerReadSettings",
