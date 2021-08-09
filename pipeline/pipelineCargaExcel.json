@@ -1,11 +1,12 @@
 {
-	"name": "pipeline1",
+	"name": "pipelineCargaExcel",
 	"properties": {
 		"activities": [
 			{
 				"name": "ForEachExcel",
 				"type": "ForEach",
 				"dependsOn": [],
+				"userProperties": [],
 				"typeProperties": {
 					"items": {
 						"value": "@pipeline().parameters.FileName",
@@ -25,7 +26,6 @@
 								"secureInput": false
 							},
 							"userProperties": [
-								null,
 								{
 									"name": "Source",
 									"value": "powerbi-20210806-0055/@{item().FileName}"
