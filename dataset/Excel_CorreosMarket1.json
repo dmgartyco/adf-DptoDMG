@@ -1,0 +1,25 @@
+{
+	"name": "Excel_CorreosMarket1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CorreosMarket"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Merchantshippingcontract",
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "powerbi-Merchantshippingcontract.xlsx",
+				"folderPath": "powerbi-20210806-0055 - copia"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

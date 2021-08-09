@@ -1,14 +1,9 @@
 {
-	"name": "tg_XLS_SQL_correosMarket",
+	"name": "tg_XLS_SQL_correosMarket1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BD_CORREOS_MARKET",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"FileName": {
-				"type": "string"
-			}
 		},
 		"folder": {
 			"name": "CorreosMarket"
@@ -18,10 +13,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": {
-				"value": "replace(@dataset().FileName, '.xlsx', '')",
-				"type": "Expression"
-			}
+			"table": "Merchantshippingcontract"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
