@@ -7,6 +7,10 @@
 				"type": "ForEach",
 				"dependsOn": [],
 				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.FileName",
+						"type": "Expression"
+					},
 					"isSequential": true,
 					"activities": [
 						{
@@ -70,7 +74,13 @@
 							"outputs": [
 								{
 									"referenceName": "tg_XLS_SQL_correosMarket",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@item().FileName",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -78,6 +88,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "CorreosMarket"
 		},
