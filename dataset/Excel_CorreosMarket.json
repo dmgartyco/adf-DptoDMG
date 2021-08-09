@@ -1,0 +1,84 @@
+{
+	"name": "Excel_CorreosMarket",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"SheetName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "CorreosMarket"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": {
+				"value": "@dataset().SheetName",
+				"type": "Expression"
+			},
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": "powerbi-20210806-0055"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Origen del dato",
+				"type": "String"
+			},
+			{
+				"name": "ACTIVIDAD",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de la empresa",
+				"type": "String"
+			},
+			{
+				"name": "CIF",
+				"type": "String"
+			},
+			{
+				"name": "Municipio",
+				"type": "String"
+			},
+			{
+				"name": "Dirección",
+				"type": "String"
+			},
+			{
+				"name": "Nombre y apellidos del contacto",
+				"type": "String"
+			},
+			{
+				"name": "Cargo del contacto",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			},
+			{
+				"name": "Teléfono",
+				"type": "String"
+			},
+			{
+				"name": "Teléfono 2",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
