@@ -11,10 +11,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Merchantshippingcontract",
+			"sheetName": "category-orders",
 			"location": {
 				"type": "FileServerLocation",
-				"fileName": "powerbi-Merchantshippingcontract.xlsx",
+				"fileName": "powerbi-subsubcategory_orders.xlsx",
 				"folderPath": "powerbi-20210806-0055 - copia"
 			},
 			"firstRowAsHeader": true

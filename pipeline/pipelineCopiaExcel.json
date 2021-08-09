@@ -16,11 +16,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "powerbi-20210806-0055/@{'powerbi-brand_orders.xlsx'}"
+						"value": "powerbi-20210806-0055 - copia/powerbi-products.xlsx"
 					},
 					{
 						"name": "Destination",
-						"value": "dbo.replace(@'powerbi-brand_orders.xlsx', '.xlsx', '')"
+						"value": "dbo.products"
 					}
 				],
 				"typeProperties": {
