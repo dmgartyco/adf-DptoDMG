@@ -14,7 +14,7 @@
 			"sheetName": "category-orders",
 			"location": {
 				"type": "FileServerLocation",
-				"fileName": "powerbi-subsubcategory_orders.xlsx",
+				"fileName": "powerbi-subcategory_orders.xlsx",
 				"folderPath": "powerbi-20210806-0055 - copia"
 			},
 			"firstRowAsHeader": true
