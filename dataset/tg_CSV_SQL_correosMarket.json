@@ -1,0 +1,28 @@
+{
+	"name": "tg_CSV_SQL_correosMarket",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BD_CORREOS_MARKET",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "CorreosMarket"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "sa",
+			"table": {
+				"value": "replace(@dataset().FileName, '.csv', '')",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
