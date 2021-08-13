@@ -1,0 +1,25 @@
+{
+	"name": "CSV_CorreosMarket_Directorio",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CorreosMarket"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": "powerbi-csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
