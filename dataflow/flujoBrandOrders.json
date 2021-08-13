@@ -1,0 +1,34 @@
+{
+	"name": "flujoBrandOrders",
+	"properties": {
+		"folder": {
+			"name": "CorreosMarket"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "sa_brand_orders",
+						"type": "DatasetReference"
+					},
+					"name": "saBRANDORDERS"
+				},
+				{
+					"dataset": {
+						"referenceName": "dbo_brand_orders",
+						"type": "DatasetReference"
+					},
+					"name": "dboBRANDORDERS"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Combinacion1"
+				}
+			],
+			"script": "source(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as string,\n\t\t{Cantidad de productos} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> saBRANDORDERS\nsource(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as decimal(15,2),\n\t\t{Cantidad de productos} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dboBRANDORDERS\nsaBRANDORDERS, dboBRANDORDERS join(saBRANDORDERS@{Año} == dboBRANDORDERS@{Año}\n\t&& saBRANDORDERS@Marca == dboBRANDORDERS@Marca,\n\tjoinType:'outer',\n\tbroadcast: 'auto')~> Combinacion1"
+		}
+	}
+}

@@ -33,7 +33,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "brand-orders"
+			"table": "brand-orders_tmp"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
