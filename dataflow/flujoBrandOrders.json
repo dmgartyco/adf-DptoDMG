@@ -26,9 +26,12 @@
 			"transformations": [
 				{
 					"name": "Combinacion1"
+				},
+				{
+					"name": "Modificarfila1"
 				}
 			],
-			"script": "source(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as string,\n\t\t{Cantidad de productos} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> saBRANDORDERS\nsource(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as decimal(15,2),\n\t\t{Cantidad de productos} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dboBRANDORDERS\nsaBRANDORDERS, dboBRANDORDERS join(saBRANDORDERS@{Año} == dboBRANDORDERS@{Año}\n\t&& saBRANDORDERS@Marca == dboBRANDORDERS@Marca,\n\tjoinType:'outer',\n\tbroadcast: 'auto')~> Combinacion1"
+			"script": "source(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as string,\n\t\t{Cantidad de productos} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> saBRANDORDERS\nsource(output(\n\t\t{Año} as string,\n\t\tMarca as string,\n\t\t{Total del producto} as decimal(15,2),\n\t\t{Cantidad de productos} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dboBRANDORDERS\nsaBRANDORDERS, dboBRANDORDERS join(saBRANDORDERS@{Año} == dboBRANDORDERS@{Año}\n\t&& saBRANDORDERS@Marca == dboBRANDORDERS@Marca,\n\tjoinType:'outer',\n\tbroadcast: 'auto')~> Combinacion1\nCombinacion1 alterRow(upsertIf(!isNull(saBRANDORDERS@{Año})&&!isNull(saBRANDORDERS@Marca)&&isNull(dboBRANDORDERS@{Año})&&isNull(dboBRANDORDERS@Marca)),\n\tdeleteIf(isNull(saBRANDORDERS@{Año})&&isNull(saBRANDORDERS@Marca)&&!isNull(dboBRANDORDERS@{Año})&&!isNull(dboBRANDORDERS@Marca))) ~> Modificarfila1"
 		}
 	}
 }
