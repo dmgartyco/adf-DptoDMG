@@ -24,8 +24,7 @@
 				},
 				"folderPath": "powerbi-csv"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "ISO-8859-1",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""

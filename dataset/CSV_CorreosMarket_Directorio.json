@@ -15,7 +15,7 @@
 				"type": "FileServerLocation",
 				"folderPath": "powerbi-csv"
 			},
-			"columnDelimiter": ";",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
