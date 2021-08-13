@@ -19,7 +19,7 @@
 		"typeProperties": {
 			"schema": "sa",
 			"table": {
-				"value": "@dataset().FileName",
+				"value": "replace(@dataset().FileName, '.xlsx', '')",
 				"type": "Expression"
 			}
 		}
