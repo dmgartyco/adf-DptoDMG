@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"FileName": {
-				"type": "string",
-				"defaultValue": "FileName"
+				"type": "string"
 			}
 		},
 		"folder": {
@@ -20,7 +19,7 @@
 		"typeProperties": {
 			"schema": "sa",
 			"table": {
-				"value": "replace(@dataset().FileName, '.csv', '')",
+				"value": "@dataset().FileName",
 				"type": "Expression"
 			}
 		}
