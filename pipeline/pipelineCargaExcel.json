@@ -39,7 +39,7 @@
 								},
 								{
 									"name": "Destination",
-									"value": "dbo.replace(@item().name, '.xlsx', '')"
+									"value": "sa.@{item().name}"
 								}
 							],
 							"typeProperties": {
@@ -73,6 +73,10 @@
 									"parameters": {
 										"FileName": {
 											"value": "@item().name",
+											"type": "Expression"
+										},
+										"SheetName": {
+											"value": "@variables('SheetName')",
 											"type": "Expression"
 										}
 									}
@@ -122,6 +126,16 @@
 				}
 			}
 		],
+		"variables": {
+			"SheetName": {
+				"type": "Array",
+				"defaultValue": [
+					"brand-orders",
+					"invoicing",
+					"customer-recurrence"
+				]
+			}
+		},
 		"folder": {
 			"name": "CorreosMarket"
 		},

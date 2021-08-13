@@ -8,15 +8,21 @@
 		"parameters": {
 			"FileName": {
 				"type": "string"
+			},
+			"SheetName": {
+				"type": "string"
 			}
 		},
 		"folder": {
-			"name": "CorreosMarket"
+			"name": "CorreosMarket/excel_csv"
 		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "brand-orders",
+			"sheetName": {
+				"value": "@dataset().SheetName",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "FileServerLocation",
 				"fileName": {

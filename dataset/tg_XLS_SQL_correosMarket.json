@@ -11,13 +11,13 @@
 			}
 		},
 		"folder": {
-			"name": "CorreosMarket"
+			"name": "CorreosMarket/sa"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dbo",
+			"schema": "sa",
 			"table": {
 				"value": "@dataset().FileName",
 				"type": "Expression"

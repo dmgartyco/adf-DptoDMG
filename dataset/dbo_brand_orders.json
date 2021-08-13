@@ -1,0 +1,40 @@
+{
+	"name": "dbo_brand_orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BD_CORREOS_MARKET",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CorreosMarket/dbo"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Año",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Marca",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Total del producto",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "Cantidad de productos",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "brand-orders"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

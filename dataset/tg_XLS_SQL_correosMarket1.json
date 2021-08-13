@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "CorreosMarket"
+			"name": "CorreosMarket/sa"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
