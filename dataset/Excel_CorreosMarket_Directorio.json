@@ -1,14 +1,9 @@
 {
-	"name": "Excel_CorreosMarket_File",
+	"name": "Excel_CorreosMarket_Directorio",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "FileServer",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"FileName": {
-				"type": "string"
-			}
 		},
 		"folder": {
 			"name": "CorreosMarket"
@@ -19,10 +14,6 @@
 			"sheetName": "brand-orders",
 			"location": {
 				"type": "FileServerLocation",
-				"fileName": {
-					"value": "@dataset().FileName",
-					"type": "Expression"
-				},
 				"folderPath": "powerbi-20210806-0055"
 			},
 			"firstRowAsHeader": true

@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('GetFiles').output.value",
+						"value": "@activity('GetFiles').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -35,11 +35,11 @@
 							"userProperties": [
 								{
 									"name": "Source",
-									"value": "powerbi-20210806-0055/@{item().FileName}"
+									"value": "powerbi-20210806-0055/@{item().name}"
 								},
 								{
 									"name": "Destination",
-									"value": "dbo.replace(@item().Filename, '.xlsx', '')"
+									"value": "dbo.replace(@item().name, '.xlsx', '')"
 								}
 							],
 							"typeProperties": {
@@ -68,15 +68,11 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "Excel_CorreosMarket",
+									"referenceName": "Excel_CorreosMarket_File",
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
-											"value": "@item().FileName",
-											"type": "Expression"
-										},
-										"SheetName": {
-											"value": "@item().SheetName",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -88,7 +84,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
-											"value": "@item().Filename",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -112,12 +108,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Excel_CorreosMarket",
+						"referenceName": "Excel_CorreosMarket_Directorio",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "FileServerReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					}
 				}
