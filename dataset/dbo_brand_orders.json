@@ -29,6 +29,12 @@
 				"name": "Cantidad de productos",
 				"type": "int",
 				"precision": 10
+			},
+			{
+				"name": "f_aud_upload",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			}
 		],
 		"typeProperties": {
