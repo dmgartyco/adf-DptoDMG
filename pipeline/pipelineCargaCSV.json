@@ -86,6 +86,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
+									"preCopyScript": "TRUNCATE TABLE @item().name",
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
