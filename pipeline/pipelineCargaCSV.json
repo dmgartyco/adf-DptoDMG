@@ -69,7 +69,7 @@
 								},
 								{
 									"name": "Destination",
-									"value": "sa.replace(@item().name, '.csv', '')"
+									"value": "sa.@{item().name}"
 								}
 							],
 							"typeProperties": {
@@ -86,10 +86,6 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"preCopyScript": {
-										"value": "\n",
-										"type": "Expression"
-									},
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
