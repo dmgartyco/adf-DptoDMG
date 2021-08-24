@@ -19,7 +19,7 @@
 		"typeProperties": {
 			"schema": "sa",
 			"table": {
-				"value": "@dataset().FileName",
+				"value": "@{dataset().FileName}",
 				"type": "Expression"
 			}
 		}

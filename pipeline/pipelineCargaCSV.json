@@ -86,6 +86,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
+									"preCopyScript": "DROP TABLE IF EXISTS [sa].[@{item().name}] ",
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
@@ -113,7 +114,7 @@
 									"referenceName": "tg_CSV_SQL_correosMarket",
 									"type": "DatasetReference",
 									"parameters": {
-										"FileName": "@item().name"
+										"FileName": "@{item().name}"
 									}
 								}
 							]
