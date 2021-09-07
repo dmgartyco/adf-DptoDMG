@@ -1,0 +1,12 @@
+{
+	"name": "SqlServerARTYCODW01",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=tcp:ARTYCODWH01;initial catalog=SA_TMK;user id=DMG",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRNRy1ERl9hMmEwZDUwNi0wNzg3LTQwMzYtOWUyYy03MTkxZTNlZmRlYzUiDQp9"
+		}
+	}
+}
