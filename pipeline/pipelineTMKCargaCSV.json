@@ -20,7 +20,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"childItems"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
@@ -51,7 +51,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "tmk/supervision/@{activity('GetFile').output.itemName}"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.E_SUPERVISION_jl"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -78,6 +87,9 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
+							"modifiedDatetimeStart": "2021-09-07T00:00:00.000Z",
+							"wildcardFolderPath": "supervision",
+							"wildcardFileName": "Reporte_supervisión_2021-09-06.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -390,7 +402,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FileName": {
-								"value": "@activity('GetFile').output.childItems",
+								"value": "@{activity('GetFile').output.itemName}",
 								"type": "Expression"
 							}
 						}

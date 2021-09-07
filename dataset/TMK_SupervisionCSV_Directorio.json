@@ -13,6 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "Reporte_supervisión_2021-09-06.csv",
 				"folderPath": "supervision",
 				"container": "tmk"
 			},
