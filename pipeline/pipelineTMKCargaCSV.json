@@ -20,14 +20,10 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"childItems"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"modifiedDatetimeStart": {
-							"value": "@utcnow()",
-							"type": "Expression"
-						},
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -57,6 +53,26 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FECHA_CARGA",
+								"value": {
+									"value": "@utcnow()",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "USUARIO_CARGA",
+								"value": "Proceso Importacion"
+							},
+							{
+								"name": "FechaFichero",
+								"value": {
+									"value": "@utcnow()",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
@@ -66,11 +82,321 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SqlServerSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "VCC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VCC",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CampaignId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CampaignId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ContactId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ContactId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ContactName",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ContactName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ContactAddress",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ContactAddress",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "InteractionId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "InteractionId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Section",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Section",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "WorkitemType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WorkitemType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoDeLlamada",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TipoDeLlamada",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OutboundProcessId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OutboundProcessId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BatchId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BatchId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Agent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Agent",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ManagementResultCode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ManagementResultCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ManagementResultDescription",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ManagementResultDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TmStmp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TmStmp",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "Duracion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Duracion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Facturables",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Facturables",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Carga",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Carga",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Fecha de Planificación",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fecha de Planificación",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WaitTime",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WaitTime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WrapUp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WrapUpTime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FECHA_CARGA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FECHA_CARGA",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "USUARIO_CARGA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO_CARGA",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaFichero",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FechaFichero",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "TMK_SupervisionCSV_File",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@activity('Get Metadata1').output.itemName",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SA_TMK_E_SUPERVISION",
 						"type": "DatasetReference"
 					}
 				]
