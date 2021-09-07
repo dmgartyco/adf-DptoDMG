@@ -20,10 +20,12 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"itemName"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"modifiedDatetimeStart": "2021-09-07T00:00:00.000Z",
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -68,7 +70,7 @@
 							{
 								"name": "FechaFichero",
 								"value": {
-									"value": "@utcnow()",
+									"value": "@startOfDay(getPastTime(1, 'Day'), 'yyyyMMdd')",
 									"type": "Expression"
 								}
 							}
@@ -388,7 +390,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FileName": {
-								"value": "@activity('Get Metadata1').output.itemName",
+								"value": "@activity('Get Metadata1').output.childItems",
 								"type": "Expression"
 							}
 						}
