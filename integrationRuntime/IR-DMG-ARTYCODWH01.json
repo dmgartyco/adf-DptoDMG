@@ -1,0 +1,7 @@
+{
+	"name": "IR-DMG-ARTYCODWH01",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Integration Runtime que conecta Azure con el servidor ARTYCODWH01 para poder acceder a las bases de datos de nuestra red"
+	}
+}
