@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata1",
+				"name": "GetFile",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -34,11 +34,11 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "CopyData",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "GetFile",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -390,7 +390,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FileName": {
-								"value": "@activity('Get Metadata1').output.childItems",
+								"value": "@activity('GetFile').output.childItems",
 								"type": "Expression"
 							}
 						}
