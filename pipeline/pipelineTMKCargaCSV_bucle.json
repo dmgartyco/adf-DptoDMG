@@ -25,7 +25,10 @@
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": true,
-						"modifiedDatetimeStart": "2021-09-09T00:00:00.000Z",
+						"modifiedDatetimeStart": {
+							"value": "@startOfDay(getPastTime(1, 'Day'), 'yyyy-MM-ddThh:mm:ss.fffZ')\n",
+							"type": "Expression"
+						},
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
