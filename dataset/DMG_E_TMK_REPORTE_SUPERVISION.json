@@ -1,0 +1,19 @@
+{
+	"name": "DMG_E_TMK_REPORTE_SUPERVISION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Base de datos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "TMK/DMG"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "sa",
+			"table": "E_TMK_REPORTE_SUPERVISION"
+		}
+	}
+}
