@@ -110,6 +110,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
+									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_REPORTE_SUPERVISION]",
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
