@@ -431,7 +431,7 @@
 							]
 						},
 						{
-							"name": "Data flow1",
+							"name": "DataflowDMG_to_DMG",
 							"type": "ExecuteDataFlow",
 							"dependsOn": [
 								{
@@ -460,6 +460,108 @@
 								},
 								"traceLevel": "Fine"
 							}
+						},
+						{
+							"name": "CopyData_SUPERVISION",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "DataflowDMG_to_DMG",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "SqlServerSink"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DMG_E_TMK_SUPERVISION",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SA_TMK_E_SUPERVISION",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "CopyData_PLANIFICACION",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "CopyData_SUPERVISION",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "SqlServerSink"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DMG_E_TMK_PLANIFICACION",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SA_TMK_E_PLANIFICACION",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
