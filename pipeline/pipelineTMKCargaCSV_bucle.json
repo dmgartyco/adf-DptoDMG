@@ -109,7 +109,7 @@
 									}
 								},
 								"sink": {
-									"type": "SqlServerSink"
+									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -422,7 +422,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "SA_TMK_E_SUPERVISION",
+									"referenceName": "DMG_E_TMK_REPORTE_SUPERVISION",
 									"type": "DatasetReference"
 								}
 							]
