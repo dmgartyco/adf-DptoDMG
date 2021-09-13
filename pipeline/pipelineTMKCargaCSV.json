@@ -1,5 +1,5 @@
 {
-	"name": "pipelineTMKCargaCSV_bucle",
+	"name": "pipelineTMKCargaCSV",
 	"properties": {
 		"activities": [
 			{
