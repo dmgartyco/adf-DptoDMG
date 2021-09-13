@@ -1,5 +1,5 @@
 {
-	"name": "TMK_LlamadasREPORTE_SUPERVISION",
+	"name": "triggerTMK_LlamadasREPORTE_SUPERVISION",
 	"properties": {
 		"description": "Carga diaria de [L, V] de las llamadas de Telemarketing. \nETL basada en el fichero de Python de ArtycoDWH01",
 		"annotations": [],
@@ -15,7 +15,7 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
+				"frequency": "Week",
 				"interval": 1,
 				"startTime": "2021-09-13T09:16:00",
 				"timeZone": "Romance Standard Time",
@@ -25,6 +25,13 @@
 					],
 					"hours": [
 						4
+					],
+					"weekDays": [
+						"Monday",
+						"Tuesday",
+						"Wednesday",
+						"Thursday",
+						"Friday"
 					]
 				}
 			}
