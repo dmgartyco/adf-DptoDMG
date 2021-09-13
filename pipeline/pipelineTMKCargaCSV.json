@@ -989,6 +989,74 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "SendEmail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-65.westeurope.logic.azure.com:443/workflows/712696859b1b46f5aa7c076e5f588f79/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=UOUVYAJGAeKa7vUr2xnfEeX5Cxx3HIHputVA_X5K7ns",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\n    \"subject\": \"pipeline: TMKLlamadas_SUPERVISION | Carga Incremental Diaria\",\n    \"message\": \"@{pipeline().Pipeline}\",\n    \"color\": \"green\",\n    \"dataFactoryName\": \"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcnow()}\",\n    \"emailTo\": \"jose_bautista@artyco.com\",\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "SendEmailError",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "GetFile",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-65.westeurope.logic.azure.com:443/workflows/712696859b1b46f5aa7c076e5f588f79/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=UOUVYAJGAeKa7vUr2xnfEeX5Cxx3HIHputVA_X5K7ns",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\n    \"subject\": \"pipeline: TMKLlamadas_SUPERVISION | Carga Incremental Diaria\",\n    \"message\": \"@{activity('GetFile').error.message} + \n          @{activity('CopyData').error.message} +\n          @{activity('DataflowDMG_to_DMG').error.message} +\n          @{activity('CopyData_SUPERVISION').error.message} +\n          @{activity('CopyData_PLANIFICACION').error.message}\",\n    \"color\": \"red\",\n    \"dataFactoryName\": \"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcnow()}\",\n    \"emailTo\": \"jose_bautista@artyco.com\",\n}\n\n",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"folder": {
