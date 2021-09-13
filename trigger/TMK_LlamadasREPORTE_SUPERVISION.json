@@ -17,8 +17,8 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2021-09-13T09:16:00Z",
-				"timeZone": "UTC",
+				"startTime": "2021-09-13T09:16:00",
+				"timeZone": "Romance Standard Time",
 				"schedule": {
 					"minutes": [
 						0
