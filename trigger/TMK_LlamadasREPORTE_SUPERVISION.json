@@ -1,0 +1,33 @@
+{
+	"name": "TMK_LlamadasREPORTE_SUPERVISION",
+	"properties": {
+		"description": "Carga diaria de [L, V] de las llamadas de Telemarketing. \nETL basada en el fichero de Python de ArtycoDWH01",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipelineTMKCargaCSV",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2021-09-13T09:16:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						4
+					]
+				}
+			}
+		}
+	}
+}
