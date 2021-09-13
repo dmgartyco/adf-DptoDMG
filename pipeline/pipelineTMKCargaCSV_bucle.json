@@ -110,7 +110,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_REPORTE_SUPERVISION]",
+									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_REPORTE_SUPERVISION]\nTRUNCATE TABLE [sa].[E_TMK_SUPERVISION]\nTRUNCATE TABLE [sa].[E_TMK_PLANIFICACION]",
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
@@ -487,8 +487,7 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "SqlServerSink",
-									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_SUPERVISION]"
+									"type": "SqlServerSink"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -539,8 +538,7 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "SqlServerSink",
-									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_PLANIFICACION]"
+									"type": "SqlServerSink"
 								},
 								"enableStaging": false,
 								"translator": {
