@@ -992,6 +992,7 @@
 			},
 			{
 				"name": "SendEmail",
+				"description": "Envio de Email",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
