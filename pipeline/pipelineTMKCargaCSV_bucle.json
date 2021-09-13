@@ -487,7 +487,8 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "SqlServerSink"
+									"type": "SqlServerSink",
+									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_SUPERVISION]"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -538,7 +539,8 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "SqlServerSink"
+									"type": "SqlServerSink",
+									"preCopyScript": "TRUNCATE TABLE [sa].[E_TMK_PLANIFICACION]"
 								},
 								"enableStaging": false,
 								"translator": {
