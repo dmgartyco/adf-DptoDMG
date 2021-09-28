@@ -1,0 +1,19 @@
+{
+	"name": "VerticaTableDIM_CLIENTE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VerticaARTYCO",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "VERTICA"
+		},
+		"annotations": [],
+		"type": "VerticaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DM_RRG",
+			"table": "DIM_CLIENTE"
+		}
+	}
+}
